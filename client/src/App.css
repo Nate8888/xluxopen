@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --dbg: #060606;
+    --w: #ffffff;
+    --lg: #dddddd;
+    --medg: #c6c6c6;
+    --medg2: #969595;
+    --p: #d81e61;
+}
+
+html, body, .App {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
+    background-color: var(--brand-one);
+}
+
+.App {
+    position: relative;
+}
+
+h1, h2, h3, h4, h5, h6, p, li, ul {
+    margin: 0;
+    padding: 0;
+}
+
+input, button, textarea {
+    font-family: 'Raleway', sans-serif;
+}
+
+.auto {
+    width: 85%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.gradient {
+    /* for texts only */
+    background-color: #d81e61;
+    background-image: linear-gradient(45deg, #d81e61, #edb53a);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    font-family: 'Raleway', sans-serif;
+}
