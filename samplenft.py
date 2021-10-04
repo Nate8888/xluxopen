@@ -74,3 +74,32 @@ def send_nft_payment(address, secret, destination, token_id):
     transaction.sign(secret)
     # Submit the transaction
     return xrpl_client.submit(transaction)
+
+
+# Mint an NFT
+nft_id = 'NFT' + str(xrpl.random_uint64())
+nft_name = 'Nathan'
+nft_desc = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+mint_nft(
+    address='rPEPPER7kfTD9w2To4CQkQZBhjuhCpz9qt',
+    secret='ssJcxvGXGn11pT7R3v7y2Xwf3m2iYaY0WVRpVvSJG5EaEqVFBcK',
+    token_id=nft_id,
+    token_name=nft_name,
+    token_desc=nft_desc
+)
+
+# Send the NFT to a different address
+send_nft_payment(
+    address='rPEPPER7kfTD9w2To4CQkQZBhjuhCpz9qt',
+    secret='ssJcxvGXGn11pT7R3v7y2Xwf3m2iYaY0WVRpVvSJG5EaEqVFBcK',
+    destination='r4H3FsyfPcXCZL34iNMY6XqaiXfLz8U4e2Y',
+    token_id=nft_id
+)
+
+# Get the NFT
+nft = xrpl_client.get_nft(nft_id)
+print(nft)
+
+# Get the NFTs owned by a specific address
+nfts = xrpl_client.get_nfts(address='r4H3FsyfPcXCZL34iNMY6XqaiXfLz8U4e2Y')
+print(nfts)
