@@ -34,7 +34,7 @@ input, button, textarea {
 .auto {
     width: 85%;
     margin: auto;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 
 .gradient {
