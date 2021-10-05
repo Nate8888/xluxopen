@@ -86,7 +86,7 @@ class Home extends React.Component {
                 <div className="showcase-container">
                     <div className="showcase">
                         <div className="left">
-                            <h1>A first-stop shop for <span className="gradient">exclusive</span> {this.state.title}</h1>
+                            <h1>A one-stop shop for <span className="gradient">exclusive</span> {this.state.title}</h1>
                             <p>From never-before-seen behind the scenes to award winning investing and basketball
                             techniques, at X you will be Y.</p>
                         </div>
