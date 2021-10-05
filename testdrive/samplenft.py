@@ -120,6 +120,28 @@ def sell_nft_after_minting(currency_code, cold_wallet, amt_for_sale, hot_wallet)
     response = xrpl.transaction.send_reliable_submission(sell_nft_prepared, client)
     print(response)
 
+def buy_nft_after_offer_create(buyer, currency_code, nft_issuer_classic_address, amt_for_sale):
+    buy_nft = xrpl.models.transactions.OfferCreate(
+        account=buyer.classic_address,
+        taker_gets = "100000000",
+        taker_pays = xrpl.models.amounts.issued_currency_amount.IssuedCurrencyAmount(
+            currency=currency_code,
+            issuer=nft_issuer_classic_address,
+            value=amt_for_sale
+        ),
+        memos=[xrpl.models.transactions.Memo(memo_data=memo_data, memo_type=memo_type)]
+    )
+
+    buy_nft_prepared = xrpl.transaction.safe_sign_and_autofill_transaction(
+        transaction=buy_nft,
+        wallet=buyer,
+        client=client,
+    )
+
+    response = xrpl.transaction.send_reliable_submission(buy_nft_prepared, client)
+    print(response)
+
+
 
 def str_to_hex(string):
     return ''.join([hex(ord(c))[2:].zfill(2) for c in string])
@@ -137,10 +159,15 @@ hot_wallet = generate_faucet_wallet(client, debug=True)
 currency_code = "4e617468616e6973746865626573740000000000".upper()
 print(currency_code)
 
-issue_quantity = nftval_to_sci(1)
+issue_quantity = nftval_to_sci(10)
+sell_quantity = nftval_to_sci(1)
 
 memo_data = str_to_hex("testingminting")
 memo_type = str_to_hex("text")
 
 mint_nft_on_xrpl(cold_wallet, hot_wallet, currency_code, issue_quantity, memo_data, memo_type)
-sell_nft_after_minting(currency_code, cold_wallet, issue_quantity, hot_wallet)
+sell_nft_after_minting(currency_code, cold_wallet, sell_quantity, hot_wallet)
+
+buyer_wallet = generate_faucet_wallet(client, debug=True)
+
+buy_nft_after_offer_create(buyer_wallet, currency_code, cold_wallet.classic_address, sell_quantity)
