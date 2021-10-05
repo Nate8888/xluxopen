@@ -1,0 +1,267 @@
+.mint-container {
+    margin-bottom: 40px;
+}
+
+.mint-container .showcase-container {
+    background-color: var(--dbg);
+}
+
+.mint-container .showcase-container h2 {
+    color: var(--w);
+    font-size: 2em;
+}
+
+.mint-container .showcase-container p {
+    color: var(--lg);
+}
+
+.mint-container .showcase {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 200px;
+}
+
+.mint {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.mint .create-title {
+    font-size: 2em;
+    font-weight: 800;
+    margin: 20px 0 10px 0;
+}
+
+.mint .sub-title {
+    color: var(--medg3);
+    font-weight: 300;
+    margin-bottom: 40px;
+}
+
+.mint .block {
+    margin: 20px 0;
+}
+
+.mint label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.mint input {
+    border: 1px solid var(--medg2);
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: block;
+    width: 300px;
+}
+
+.mint input:focus {
+    outline-color: var(--brand-two);
+}
+
+.mint .price-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.mint .eth-symbol {
+    font-size: 1.5em;
+}
+
+.mint .dollars {
+    font-size: 1.5em;
+    color: var(--light-grey-one);
+    font-weight: 200;
+}
+
+.mint .create-btn {
+    background-color: var(--w);
+    color: var(--dbg);
+    border: 1px solid var(--dbg);
+    transition: 0.2s;
+    border-radius: 4px;
+    padding: 4px 25px;
+    width: 360px;
+    text-align: left;
+    padding: 16px;
+}
+
+.mint .create-btn:hover {
+    box-shadow: 0 0 18px var(--medg);
+    transition: 0.2s;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    border-right: 10px solid var(--p);
+}
+
+.mint .right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+
+.mint .preview-title {
+    color: var(--brand-two);
+    font-weight: 200;
+    font-size: 1.4em;
+    margin-bottom: 40px;
+}
+
+.mint .item {
+    transition: 0.2s;
+    background-color: var(--w);
+    border-radius: 15px;
+    width: 300px;
+    padding: 12px;
+    border: 1px solid var(--light-grey-zero);
+    overflow: hidden;
+    border: 1px solid var(--medg);
+}
+
+.mint .item:hover {
+    transition: 0.2s;
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--medg);
+}
+
+.mint .item .image-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+    background-color: var(--light-grey-one);
+}
+
+.mint .item:hover .nft-img {
+    width: 120%;
+    margin-top: -30px;
+    margin-left: -30px;
+    transition: 0.2s;
+}
+
+.mint .item .nft-img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    transition: 0.2s;
+}
+
+.mint .item .name {
+    margin: 0;
+    margin-top: 12px;
+    font-weight: bold;
+    font-size: 1.4em;
+    color: var(--brand);
+}
+
+.mint .item:hover .desc {
+    margin: 8px 0;
+    transition: 0.2s;
+}
+
+.mint .item .desc {
+    margin: 0;
+    color: var(--light-grey-two);
+    font-size: 1em;
+    font-weight: 300;
+    max-width: 100%;
+    word-wrap: break-word;
+    transition: 0.2s;
+}
+
+.mint .item .price {
+    margin: 0;
+    font-size: 1.4em;
+    color: var(--brand);
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.mint .item:hover .owner {
+    border-radius: 4px;
+    background-color: var(--dbg);
+    transition: 0.2s;
+    box-shadow: 0 0 10px var(--medg2);
+}
+
+.mint .item:hover .owner p {
+    color: var(--w) !important;
+}
+
+.mint .item .owner {
+    margin: 0;
+    color: var(--dbg);
+    font-weight: 500;
+    border-radius: 4px;
+    display: flex;
+    gap: 8px;
+    padding: 1px 8px 1px 0;
+    width: 90px;
+    transition: 0.2s;
+    margin-bottom: 15px;
+}
+
+.mint .item .owner img {
+    width: 20px;
+    border-radius: 50%;
+    margin: 0 !important;
+}
+
+.mint .item .owner p {
+    color: var(--dbg);
+    margin: 0 !important;
+}
+
+.mint .item:hover .quantity {
+    transition: 0.2s;
+    background-color: var(--p);
+    color: var(--w);
+}
+
+.mint .item .quantity {
+    margin: 0;
+    color: var(--w);
+    font-weight: 500;
+    background-color: var(--w);
+    color: var(--p);
+    border: 1px solid var(--p);
+    border-radius: 4px;
+    padding: 1px 8px;
+    display: inline-block;
+    transition: 0.2s;
+}
+
+.mint .file-input-wrapper {
+    position: relative;
+    background-color: var(--dbg);
+    color: var(--w);
+    width: 330px;
+    padding: 16px;
+    transition: 0.2s;
+    border-right: 0px solid var(--dbg);
+    border-radius: 4px;
+}
+
+.mint .file-input-wrapper:hover {
+    border-right: 20px solid var(--p);
+    transition: 0.2s;
+    font-weight: bold;
+}
+
+.mint .file-input-wrapper input {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+}

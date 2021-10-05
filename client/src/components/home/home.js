@@ -1,4 +1,5 @@
 import React from 'react'
+import { navigate } from '@reach/router'
 
 import NFTSample from '../../assets/test-img.jpeg'
 
@@ -11,6 +12,8 @@ class Home extends React.Component {
             // @warning: development only
             // uncomment for production since we'll be retrieving
             // NFTs from XRPL
+            title: 'information',
+            titleIx: 0,
             items: [
                 {
                     filePreview: NFTSample,
@@ -18,7 +21,8 @@ class Home extends React.Component {
                     description: 'Chihuaha chihuaha chihuaha chihuaha chihuaha chihuaha chihuaha',
                     ownerImg: NFTSample,
                     ownerAddr: '0x8920',
-                    available: 2
+                    available: 2,
+                    price: 0.5
                 },
                 {
                     filePreview: NFTSample,
@@ -26,7 +30,8 @@ class Home extends React.Component {
                     description: 'Chihuaha chihuaha chihuaha chihuaha chihuaha chihuaha chihuaha',
                     ownerImg: NFTSample,
                     ownerAddr: '0x8920',
-                    available: 3
+                    available: 3,
+                    price: 219
                 },
                 {
                     filePreview: NFTSample,
@@ -34,7 +39,8 @@ class Home extends React.Component {
                     description: 'Chihuaha chihuaha chihuaha chihuaha chihuaha chihuaha chihuaha',
                     ownerImg: NFTSample,
                     ownerAddr: '0x8920',
-                    available: 1
+                    available: 1,
+                    price: 100
                 },
                 {
                     filePreview: NFTSample,
@@ -42,7 +48,8 @@ class Home extends React.Component {
                     description: 'Chihuaha chihuaha chihuaha chihuaha chihuaha chihuaha chihuaha',
                     ownerImg: NFTSample,
                     ownerAddr: '0x8920',
-                    available: 10
+                    available: 10,
+                    price: 120
                 },
                 {
                     filePreview: NFTSample,
@@ -50,25 +57,36 @@ class Home extends React.Component {
                     description: 'Chihuaha chihuaha chihuaha chihuaha chihuaha chihuaha chihuaha',
                     ownerImg: NFTSample,
                     ownerAddr: '0x8920',
-                    available: 5
+                    available: 5,
+                    price: 600
                 }
             ]
         }
     }
+
+    componentDidMount() {
+        setInterval(() => {
+            const words = ["techniques", "strategies", "experiences", "theories", "information"]
+            const ix = (this.state.titleIx + 1) % words.length;
+            this.setState({ titleIx: ix, title: words[ix] })
+        }, 2000)
+    }
+
     render() {
         // Formatting items into our own Thumbnails
         let items = <p>Loading...</p>
         if (this.state.items && this.state.items.length > 0) {
             items = this.state.items.map((i, ix) => (
-                <NFTThumbnail item={i} />
+                <NFTThumbnail item={i} key={ix} />
             ))
         }
+
         return (
             <div className="home-container">
                 <div className="showcase-container">
                     <div className="showcase">
                         <div className="left">
-                            <h1>A first-stop shop for <span className="gradient">exclusive</span> information</h1>
+                            <h1>A first-stop shop for <span className="gradient">exclusive</span> {this.state.title}</h1>
                             <p>From never-before-seen behind the scenes to award winning investing and basketball
                             techniques, at X you will be Y.</p>
                         </div>
@@ -106,9 +124,10 @@ class Home extends React.Component {
 class NFTThumbnail extends React.Component {
     render() {
         const { item } = this.props
+        const state = { ...item }
 
         return (
-            <div className="thumbnail">
+            <div className="thumbnail" onClick={() => navigate('/nft/3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy/725308942', { state })}>
                 <div className="img-wrapper">
                     <img src={item.filePreview} alt="NFT Thumbnail"/>
                 </div>
@@ -124,6 +143,7 @@ class NFTThumbnail extends React.Component {
                             <p>{item.available} avail.</p>
                         </div>
                     </footer>
+                    <p className="price">XRP {item.price}</p>
                 </div>
             </div>
         )
