@@ -98,6 +98,29 @@ def mint_nft_on_xrpl(cold_wallet, hot_wallet, currency_code, issue_quantity, mem
     ))
     print(response)
 
+def sell_nft_after_minting(currency_code, cold_wallet, amt_for_sale, hot_wallet):
+
+    sell_nft = xrpl.models.transactions.OfferCreate(
+        account=hot_wallet.classic_address,
+        taker_pays = "100000000",
+        taker_gets = xrpl.models.amounts.issued_currency_amount.IssuedCurrencyAmount(
+            currency=currency_code,
+            issuer=cold_wallet.classic_address,
+            value=amt_for_sale
+        ),
+        memos=[xrpl.models.transactions.Memo(memo_data=memo_data, memo_type=memo_type)]
+    )
+
+    sell_nft_prepared = xrpl.transaction.safe_sign_and_autofill_transaction(
+        transaction=sell_nft,
+        wallet=hot_wallet,
+        client=client,
+    )
+
+    response = xrpl.transaction.send_reliable_submission(sell_nft_prepared, client)
+    print(response)
+
+
 def str_to_hex(string):
     return ''.join([hex(ord(c))[2:].zfill(2) for c in string])
 
@@ -120,3 +143,4 @@ memo_data = str_to_hex("testingminting")
 memo_type = str_to_hex("text")
 
 mint_nft_on_xrpl(cold_wallet, hot_wallet, currency_code, issue_quantity, memo_data, memo_type)
+sell_nft_after_minting(currency_code, cold_wallet, issue_quantity, hot_wallet)
