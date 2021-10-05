@@ -10,7 +10,7 @@ class Header extends React.Component {
                     <p className="logo">Logo</p>
                     <div className="nav">
                         <a href="/">Explore</a>
-                        <a href="/">Create</a>
+                        <a href="/mint">Create</a>
                         <a className="special" href="/">Connect Wallet</a>
                     </div>
                 </div>

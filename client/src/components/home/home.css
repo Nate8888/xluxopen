@@ -52,6 +52,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 .cats .checkbox:hover {
@@ -85,8 +86,9 @@
     border-radius: 4px;
     border: 1px solid var(--medg);
     width: 300px;
-    height: 600px;
+    height: 620px;
     transition: 0.2s;
+    position: relative;
 }
 
 .thumbnail:hover {
@@ -126,7 +128,7 @@
 }
 
 .thumbnail:hover .d {
-    margin: 30px 0;
+    margin: 20px 0;
     transition: 0.2s;
 }
 
@@ -174,4 +176,23 @@
     transition: 0.2s;
     background-color: var(--p);
     color: var(--w);
+}
+
+.thumbnail .price {
+    opacity: 0;
+    transition: 0.2s;
+    font-size: 1.4em;
+    width: 100%;
+    border-radius: 4px;
+    position: absolute;
+    left: 210px;
+    /* bottom: 20px; */
+    top: 590px;
+}
+
+.thumbnail:hover .price {
+    opacity: 1;
+    transition: 0.2s;
+    right: 0;
+    bottom: 0;
 }

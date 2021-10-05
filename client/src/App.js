@@ -16,7 +16,7 @@ class App extends React.Component {
                 <Router>
                     <Home path="/" />
                     <Mint path="/mint" />
-                    <Detail path="/nft/:uid" />
+                    <Detail path="/nft/:wallet/:tokenid" />
                 </Router>
             </div>
         )
