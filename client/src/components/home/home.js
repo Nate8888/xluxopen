@@ -2,6 +2,13 @@ import React from 'react'
 import { navigate } from '@reach/router'
 
 import NFTSample from '../../assets/test-img.jpeg'
+import DavidChang from '../../assets/david-chang.png'
+import DanielS from '../../assets/ds.png'
+import LBJames from '../../assets/lbj.png'
+import MRBeast from '../../assets/mr-beast.png'
+import TBLee from '../../assets/tim-berners-lee.png'
+import WBuffett from '../../assets/wb.png'
+import SBlakely from '../../assets/sara-blakely.png'
 
 import './home.css'
 
@@ -107,6 +114,39 @@ class Home extends React.Component {
                             <div className="checkbox">Math and Physics</div>
                             <div className="checkbox">Music</div>
                             <div className="checkbox">Programming</div>
+                        </div>
+                    </div>
+                    <div className="pics">
+                        <h2>Browse partners</h2>
+                        <div className="partners">
+                            <div>
+                                <img src={DavidChang} alt="partner" />
+                                <p>Cooking Live with David Chang</p>
+                            </div>
+                            <div>
+                                <img src={DanielS} alt="partner" />
+                                <p>Technical Interview questions with Daniel Shiffman</p>
+                            </div>
+                            <div>
+                                <img src={SBlakely} alt="partner" />
+                                <p>Sara Blakely's process to make millions</p>
+                            </div>
+                            <div>
+                                <img src={LBJames} alt="partner" />
+                                <p>Basketball Techniques with LeBron James</p>
+                            </div>
+                            <div>
+                                <img src={MRBeast} alt="partner" />
+                                <p>Inside MrBeast's brain and house with MrBeast</p>
+                            </div>
+                            <div>
+                                <img src={TBLee} alt="partner" />
+                                <p>Early Internet Specs with Tim-Berners Lee</p>
+                            </div>
+                            <div>
+                                <img src={WBuffett} alt="partner" />
+                                <p>Exclusive Investing techniques with Warren Buffett</p>
+                            </div>
                         </div>
                     </div>
                     <div className="marketplace">
