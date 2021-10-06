@@ -22,10 +22,11 @@ class Mint extends React.Component {
             nft_file: '',
             noun: 'community',
             dollars: 0,
+            uploadedFile: '',
             loading: true
         }
 
-        this.XRPL_USD_RATE = 2000;
+        this.XRPL_USD_RATE = 1.10;
 
         this.create = this.create.bind(this)
         this.onChangeNFTName = this.onChangeNFTName.bind(this)
@@ -76,6 +77,10 @@ class Mint extends React.Component {
 
     onChangeNFTFile(e) {
         this.setState({ nft_file: e.target.value })
+        const sampleFile = "https://firebasestorage.googleapis.com/v0/b/xrpl-nate.appspot.com/o/makeup.gif?alt=media&token=ad8b9933-1e42-4d3f-80c9-a343580e8ede"
+        setTimeout(() => {
+            this.setState({ uploadedFile: sampleFile })
+        }, 1500)
     }
 
     async create() {
@@ -95,22 +100,24 @@ class Mint extends React.Component {
         }
 
         this.setState({ loading: true })
-        addNFTToDB
-        .then(url => {
-            // API call here (to submit file URL)
-
-            // To prevent multiple requests.
+        // addNFTToDB
+        // .then(url => {
+        //     // API call here (to submit file URL)
+        //
+        //     // To prevent multiple requests.
             setTimeout(() => {
                 navigate("/")
             }, 2500)
-        })
-        .catch(error => {
-            console.log("Error uploading file:")
-            console.log(error)
-        })
+        // })
+        // .catch(error => {
+        //     console.log("Error uploading file:")
+        //     console.log(error)
+        // })
     }
 
     render() {
+        let iwclassname = "image-wrapper"
+        iwclassname += this.state.uploadedFile ? '' : ' not'
         return (
             <div className='mint-container'>
                 {this.state.loading && <Loading />}
@@ -185,12 +192,20 @@ class Mint extends React.Component {
                     <div className='right'>
                         <p className='preview-title'>Your NFT 👇</p>
                         <div className='item'>
-                            <div className='image-wrapper'>
-                                <img
-                                    src={this.state.nft_file || 'https://firebasestorage.googleapis.com/v0/b/test-385af.appspot.com/o/test-img.jpeg?alt=media&token=1a6d4d4d-8337-43c0-9c09-29f85b5c38a4'}
-                                    alt='Token preview'
-                                    className="nft-img"
-                                />
+                            <div className={iwclassname}>
+                                {this.state.uploadedFile ? (
+                                    <img
+                                        src={this.state.uploadedFile}
+                                        alt='Loading...'
+                                        className="nft-img"
+                                    />
+                                ) : (
+                                    <img
+                                        src={this.state.nft_file || NFTSample}
+                                        alt='Loading...'
+                                        className="nft-img"
+                                    />
+                                )}
                             </div>
                             <p className='name'>{this.state.nft_name || 'A ticket to paradise'}</p>
                             <p className='desc'>{this.state.nft_description || 'Never-before-seen behind the scenes of the Big Bang Theory'}</p>
@@ -199,7 +214,7 @@ class Mint extends React.Component {
                                 <img src={NFTSample} alt="Owner" />
                                 <span>{this.state.creator_addr}</span>
                             </p>
-                            <p className='quantity'>{this.state.nft_quantity || '30'} tickets available</p>
+                            <p className='quantity'>{this.state.nft_quantity || '30'} tokens available</p>
                         </div>
                     </div>
                 </div>

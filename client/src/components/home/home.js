@@ -25,65 +25,65 @@ class Home extends React.Component {
                 {
                     filePreview: "https://firebasestorage.googleapis.com/v0/b/test-385af.appspot.com/o/painting.gif?alt=media&token=e5dc45d2-e861-4d3e-b36a-335db72fe1e3",
                     name: 'Creating $1M NFTs from scratch with Beeple',
-                    description: 'Ut enim ad minima veniam, quis nostrum exercitationem ullam',
+                    description: 'Beeple will guide you through his famous digital art techniques',
                     ownerImg: NFTSample,
                     ownerAddr: '0x8920',
                     available: 2,
-                    price: 0.5
+                    price: 93.30
                 },
                 {
                     filePreview: "https://firebasestorage.googleapis.com/v0/b/test-385af.appspot.com/o/basketball_nft.gif?alt=media&token=c0a871cb-def7-440f-902f-d4d2004f22b1",
                     name: 'Basketball Techniques with LeBron James',
-                    description: 'Ut enim ad minima veniam, quis nostrum exercitationem ullam',
+                    description: 'LeBron James himself recorded this video with his basketball techniques',
                     ownerImg: NFTSample,
                     ownerAddr: '0x11e9',
                     available: 3,
-                    price: 219
+                    price: "1,864"
                 },
                 {
                     filePreview: "https://firebasestorage.googleapis.com/v0/b/test-385af.appspot.com/o/bts.gif?alt=media&token=836d4497-4a73-404d-80f4-ab6cc2d584e1",
                     name: 'Exclusive behind the scenes from TBBT',
-                    description: 'Ut enim ad minima veniam, quis nostrum exercitationem ullam',
+                    description: 'Never-before-seen footage of The Big Bang Theory',
                     ownerImg: NFTSample,
                     ownerAddr: '0x7812',
                     available: 1,
-                    price: 100
+                    price: 839.07
                 },
                 {
                     filePreview: "https://firebasestorage.googleapis.com/v0/b/test-385af.appspot.com/o/cooking.gif?alt=media&token=581a3605-0c38-4294-86f3-adb879173200",
                     name: 'Cooking side by side with Daniel Chang',
-                    description: 'Ut enim ad minima veniam, quis nostrum exercitationem ullam',
+                    description: 'Daniel Change himself teaches you his secrets',
                     ownerImg: NFTSample,
                     ownerAddr: '0x2911',
                     available: 10,
-                    price: 120
+                    price: 233.08
                 },
                 {
                     filePreview: "https://firebasestorage.googleapis.com/v0/b/test-385af.appspot.com/o/prog.gif?alt=media&token=b19ffa74-2b2d-474c-9890-f065e9a310df",
                     name: 'Early Internet Specs and Ideas with TBerners Lee',
-                    description: 'Ut enim ad minima veniam, quis nostrum exercitationem ullam',
+                    description: 'Tim Berners-Lee shows you his early Internet specs',
                     ownerImg: NFTSample,
                     ownerAddr: '0x1ef4',
                     available: 5,
-                    price: 600
+                    price: 198.34
                 },
                 {
                     filePreview: "https://firebasestorage.googleapis.com/v0/b/xrpl-nate.appspot.com/o/makeup.gif?alt=media&token=ad8b9933-1e42-4d3f-80c9-a343580e8ede",
-                    name: 'Oscar-Winning Make-Up Technique with S. Howard',
-                    description: 'Ut enim ad minima veniam',
+                    name: 'Oscar-Winning Make-Up Technique with S. Hope',
+                    description: 'S. Howard teaches you live her oscar-winning make-up technique',
                     ownerImg: NFTSample,
                     ownerAddr: '0x2911',
                     available: 10,
-                    price: 120
+                    price: 167.81
                 },
                 {
                     filePreview: "https://firebasestorage.googleapis.com/v0/b/xrpl-nate.appspot.com/o/mrbeast.gif?alt=media&token=465b1dcf-7509-46f0-80eb-b80c8bc4e862",
                     name: 'Million dollar insights with Mr. Beast',
-                    description: 'Ut enim ad minima veniam, quis nostrum exercitationem ullam',
+                    description: 'Mr.Beast shares his secrets in this exclusive video',
                     ownerImg: NFTSample,
                     ownerAddr: '0x2911',
                     available: 10,
-                    price: 120
+                    price: 503
                 },
             ]
         }
@@ -208,7 +208,7 @@ class NFTThumbnail extends React.Component {
                             <p>{item.available} avail.</p>
                         </div>
                     </footer>
-                    <p className="price">XRP {item.price}</p>
+                    <p className="price">{item.price} XRP</p>
                 </div>
             </div>
         )

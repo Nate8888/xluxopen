@@ -43,7 +43,7 @@ class Detail extends React.Component {
                     <div className="right-detail">
                         <div className="name">{item.name}</div>
                         <div className="d">{item.description}</div>
-                        <div className="price">XRP {item.price}</div>
+                        <div className="price">{item.price} XRP</div>
                         <div className="available">{item.available} Available</div>
                         <div className="owner">
                             <img src={NFTSample} alt="NFT Owner" />

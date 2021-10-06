@@ -1,6 +1,8 @@
 import React from 'react'
 import { navigate } from '@reach/router'
 
+import XLUXLogo from '../../assets/xlux.svg'
+
 import './header.css'
 
 class Header extends React.Component {
@@ -8,7 +10,9 @@ class Header extends React.Component {
         return (
             <div className="header-container">
                 <div className="header">
-                    <p className="logo" onClick={() => navigate("/")}>xlux</p>
+                    <p className="logo" onClick={() => navigate("/")}>
+                        <img src={XLUXLogo} alt={"xLux: Exclusive NFTs"} />
+                    </p>
                     <div className="nav">
                         <a href="/">Explore</a>
                         <a href="/mint">Create</a>
