@@ -23,55 +23,61 @@ class Home extends React.Component {
             titleIx: 0,
             items: [
                 {
-                    filePreview: NFTSample,
-                    name: 'A Chihuahua',
-                    description: 'Chihuaha chihuaha chihuaha chihuaha chihuaha chihuaha chihuaha',
+                    filePreview: "https://firebasestorage.googleapis.com/v0/b/test-385af.appspot.com/o/painting.gif?alt=media&token=e5dc45d2-e861-4d3e-b36a-335db72fe1e3",
+                    name: 'Creating $1M NFTs from scratch with Beeple',
+                    description: 'Ut enim ad minima veniam, quis nostrum exercitationem ullam',
                     ownerImg: NFTSample,
                     ownerAddr: '0x8920',
                     available: 2,
                     price: 0.5
                 },
                 {
-                    filePreview: NFTSample,
-                    name: 'A Chihuahua',
-                    description: 'Chihuaha chihuaha chihuaha chihuaha chihuaha chihuaha chihuaha',
+                    filePreview: "https://firebasestorage.googleapis.com/v0/b/test-385af.appspot.com/o/basketball_nft.gif?alt=media&token=c0a871cb-def7-440f-902f-d4d2004f22b1",
+                    name: 'Basketball Techniques with LeBron James',
+                    description: 'Ut enim ad minima veniam, quis nostrum exercitationem ullam',
                     ownerImg: NFTSample,
-                    ownerAddr: '0x8920',
+                    ownerAddr: '0x11e9',
                     available: 3,
                     price: 219
                 },
                 {
-                    filePreview: NFTSample,
-                    name: 'A Chihuahua',
-                    description: 'Chihuaha chihuaha chihuaha chihuaha chihuaha chihuaha chihuaha',
+                    filePreview: "https://firebasestorage.googleapis.com/v0/b/test-385af.appspot.com/o/bts.gif?alt=media&token=836d4497-4a73-404d-80f4-ab6cc2d584e1",
+                    name: 'Exclusive behind the scenes from TBBT',
+                    description: 'Ut enim ad minima veniam, quis nostrum exercitationem ullam',
                     ownerImg: NFTSample,
-                    ownerAddr: '0x8920',
+                    ownerAddr: '0x7812',
                     available: 1,
                     price: 100
                 },
                 {
-                    filePreview: NFTSample,
-                    name: 'A Chihuahua',
-                    description: 'Chihuaha chihuaha chihuaha chihuaha chihuaha chihuaha chihuaha',
+                    filePreview: "https://firebasestorage.googleapis.com/v0/b/test-385af.appspot.com/o/cooking.gif?alt=media&token=581a3605-0c38-4294-86f3-adb879173200",
+                    name: 'Cooking side by side with Daniel Chang',
+                    description: 'Ut enim ad minima veniam, quis nostrum exercitationem ullam',
                     ownerImg: NFTSample,
-                    ownerAddr: '0x8920',
+                    ownerAddr: '0x2911',
                     available: 10,
                     price: 120
                 },
                 {
-                    filePreview: NFTSample,
-                    name: 'A Chihuahua',
-                    description: 'Chihuaha chihuaha chihuaha chihuaha chihuaha chihuaha chihuaha',
+                    filePreview: "https://firebasestorage.googleapis.com/v0/b/test-385af.appspot.com/o/prog.gif?alt=media&token=b19ffa74-2b2d-474c-9890-f065e9a310df",
+                    name: 'Early Internet Specs and Ideas with TBerners Lee',
+                    description: 'Ut enim ad minima veniam, quis nostrum exercitationem ullam',
                     ownerImg: NFTSample,
-                    ownerAddr: '0x8920',
+                    ownerAddr: '0x1ef4',
                     available: 5,
                     price: 600
                 }
             ]
         }
+
+        this.videoRef = React.createRef()
     }
 
     componentDidMount() {
+        window.addEventListener("click", () => {
+            if (this.videoRef && this.videoRef.current) this.videoRef.current.play()
+        })
+
         setInterval(() => {
             const words = ["techniques", "strategies", "experiences", "theories", "information"]
             const ix = (this.state.titleIx + 1) % words.length;
@@ -98,7 +104,8 @@ class Home extends React.Component {
                             techniques, at X you will be Y.</p>
                         </div>
                         <div className="right">
-                            <p>video here</p>
+                            <video ref={this.videoRef} loop src="https://firebasestorage.googleapis.com/v0/b/test-385af.appspot.com/o/main_xrpl.mp4?alt=media&token=87554c8f-fff3-402d-9e46-1b3604cd0fb9">
+                            </video>
                         </div>
                     </div>
                 </div>
@@ -169,7 +176,7 @@ class NFTThumbnail extends React.Component {
         return (
             <div className="thumbnail" onClick={() => navigate('/nft/3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy/725308942', { state })}>
                 <div className="img-wrapper">
-                    <img src={item.filePreview} alt="NFT Thumbnail"/>
+                    <img src={item.filePreview} alt="NFT Thumbnail" />
                 </div>
                 <div className="info">
                     <p className="name">{item.name}</p>
