@@ -23,7 +23,7 @@ def mint_nft_on_xrpl(cold_wallet, hot_wallet, currency_code, issue_quantity, mem
     print("Sending cold address AccountSet transaction...")
     response = xrpl.transaction.send_reliable_submission(cst_prepared, client)
     print(response)
-
+    print("==============================================")
     # Configure hot address settings -----------------------------------------------
     hot_settings_tx = xrpl.models.transactions.AccountSet(
         account=hot_wallet.classic_address,
@@ -37,7 +37,7 @@ def mint_nft_on_xrpl(cold_wallet, hot_wallet, currency_code, issue_quantity, mem
     print("Sending hot address AccountSet transaction...")
     response = xrpl.transaction.send_reliable_submission(hst_prepared, client)
     print(response)
-
+    print("==============================================")
 
     # Create trust line from hot to cold address -----------------------------------
     trust_set_tx = xrpl.models.transactions.TrustSet(
@@ -58,7 +58,7 @@ def mint_nft_on_xrpl(cold_wallet, hot_wallet, currency_code, issue_quantity, mem
     print("Creating trust line from hot address to issuer...")
     response = xrpl.transaction.send_reliable_submission(ts_prepared, client)
     print(response)
-
+    print("==============================================")
 
     # Send token -------------------------------------------------------------------
     send_token_tx = xrpl.models.transactions.Payment(
@@ -79,8 +79,8 @@ def mint_nft_on_xrpl(cold_wallet, hot_wallet, currency_code, issue_quantity, mem
     )
     print(f"Sending {issue_quantity} {currency_code} to {hot_wallet.classic_address}...")
     response = xrpl.transaction.send_reliable_submission(pay_prepared, client)
-    print(response)
-
+    print("Transaction Succeded! Here's the ledger hash: "+response.result.get('hash'))
+    print("==============================================")
 
     # Check balances ---------------------------------------------------------------
     print("Getting hot address balances...")
@@ -89,7 +89,7 @@ def mint_nft_on_xrpl(cold_wallet, hot_wallet, currency_code, issue_quantity, mem
         ledger_index="validated",
     ))
     print(response)
-
+    print("==============================================")
     print("Getting cold address balances...")
     response = client.request(xrpl.models.requests.GatewayBalances(
         account=cold_wallet.classic_address,
@@ -97,9 +97,10 @@ def mint_nft_on_xrpl(cold_wallet, hot_wallet, currency_code, issue_quantity, mem
         hotwallet=[hot_wallet.classic_address]
     ))
     print(response)
+    print("==============================================")
 
 def sell_nft_after_minting(currency_code, cold_wallet, amt_for_sale, hot_wallet):
-
+    print("SELLING THE NFT...")
     sell_nft = xrpl.models.transactions.OfferCreate(
         account=hot_wallet.classic_address,
         taker_pays = "100000000",
@@ -118,9 +119,11 @@ def sell_nft_after_minting(currency_code, cold_wallet, amt_for_sale, hot_wallet)
     )
 
     response = xrpl.transaction.send_reliable_submission(sell_nft_prepared, client)
-    print(response)
+    print("Transaction Succeded! Here's the ledger hash: "+response.result.get('hash'))
+    print("==============================================")
 
 def buy_nft_after_offer_create(buyer, currency_code, nft_issuer_classic_address, amt_for_sale):
+    print("BUYING THE NFT....")
     buy_nft = xrpl.models.transactions.OfferCreate(
         account=buyer.classic_address,
         taker_gets = "100000000",
@@ -139,8 +142,8 @@ def buy_nft_after_offer_create(buyer, currency_code, nft_issuer_classic_address,
     )
 
     response = xrpl.transaction.send_reliable_submission(buy_nft_prepared, client)
-    print(response)
-
+    print("Transaction Succeded! Here's the ledger hash: "+response.result.get('hash'))
+    print("==============================================")
 
 
 def str_to_hex(string):
