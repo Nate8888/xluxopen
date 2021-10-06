@@ -1,6 +1,7 @@
 import React from 'react';
 import { navigate } from '@reach/router'
 import Loading from '../loading'
+import { addNFTToDB } from '../../firebase'
 
 import NFTSample from '../../assets/test-img.jpeg'
 
@@ -94,9 +95,19 @@ class Mint extends React.Component {
         }
 
         this.setState({ loading: true })
-        setTimeout(() => {
-            navigate("/")
-        }, 2500)
+        addNFTToDB
+        .then(url => {
+            // API call here (to submit file URL)
+
+            // To prevent multiple requests.
+            setTimeout(() => {
+                navigate("/")
+            }, 2500)
+        })
+        .catch(error) => {
+            console.log("Error uploading file:")
+            console.log(error)
+        }
     }
 
     render() {
