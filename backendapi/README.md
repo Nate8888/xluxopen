@@ -7,7 +7,7 @@ xLux is a one-stop shop for limited and exclusive techniques, strategies, and ex
 All API requests interact with wallets that are currently stored in memory. They are automatically generated as needed throughout the demo. However, if there's any type of glitch/bug, you can force reset the wallets and it might fix your issues.
 
 ```http
-POST xluxnate.appspot.com/resetwallets
+POST 127.0.0.1:8080/resetwallets
 ```
 
 | Parameter | Type | Description |
@@ -27,7 +27,7 @@ POST xluxnate.appspot.com/resetwallets
 This endpoint gets the current address for the NFT issuer, distributor, and buyer for visual purposes. You will only use this API if you are interested in showing wallet addresses.
 
 ```http
-POST xluxnate.appspot.com/getwallets
+POST 127.0.0.1:8080/getwallets
 ```
 
 | Parameter | Type | Description |
@@ -45,7 +45,7 @@ POST xluxnate.appspot.com/getwallets
 This endpoint gets all NFTs that are for sale on xLux. It will only return the NFTs that were minted through our platform.
 
 ```http
-POST xluxnate.appspot.com/nftsforsale
+POST 127.0.0.1:8080/nftsforsale
 ```
 
 | Parameter | Type | Description |
@@ -82,7 +82,7 @@ POST xluxnate.appspot.com/nftsforsale
 This endpoint will first mint the NFT using the built-in issuer and distribution accounts and then it will open a 'selling' position on the XRP Ledger. The transaction will be added to the database so it can be used on the endpoint that lists nfts for sale.
 
 ```http
-POST xluxnate.appspot.com/mint
+POST 127.0.0.1:8080/mint
 ```
 
 Form-Data
@@ -109,7 +109,7 @@ This endpoint is the most complicated because it depends on the data that you re
 My recommendation is that you first get all data from `/nftsforsale` and then you will send the data for 1 specific NFT that someone is trying to buy as shown below:
 
 ```http
-POST xluxnate.appspot.com/buy
+POST 127.0.0.1:8080/buy
 ```
 
 | Parameter | Type | Description |
