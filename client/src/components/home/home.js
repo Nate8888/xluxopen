@@ -108,14 +108,11 @@ class Home extends React.Component {
 
         // Retrieving wallet addresses
         let apiURL = "https://xlux.herokuapp.com/getwallets"
-        let bodyFormData = new FormData();
-        bodyFormData.append("file_url_raw", url);
 
         // API call here (to submit file URL)
         axios({
             method: "post",
             url: apiURL,
-            data: bodyFormData,
             headers: { "Content-Type": "multipart/form-data" },
         })
         .then(response => {
