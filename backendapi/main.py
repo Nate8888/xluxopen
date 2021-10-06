@@ -257,6 +257,7 @@ def simulate_buying():
     res = {'buyingTransaction':final_transaction_url_of_nft_buy, 'buyerAddress': buyer_wallet.classic_address}
     return jsonify(res)
 
+
 @app.route('/resetwallets', methods=['POST'])
 @cross_origin()
 def something_bugged():
@@ -264,6 +265,17 @@ def something_bugged():
     reset_cold_wallet()
     reset_buyer_wallet()
     res = {'status':'OK'}
+    return jsonify(res)
+
+@app.route('/getwallets', methods=['POST'])
+@cross_origin()
+def getwalletvals():
+    if cold_wallet == None or hot_wallet == None or buyer_wallet == None:
+        reset_hot_wallet()
+        reset_cold_wallet()
+        reset_buyer_wallet()
+
+    res = {'issuer':cold_wallet.classic_address, 'distributor':hot_wallet.classic_address, 'buyer':buyer_wallet.classic_address}
     return jsonify(res)
 
 # Start Flask backend
