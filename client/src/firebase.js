@@ -16,13 +16,13 @@ import {
     where
 } from "firebase/firestore";
 const firebaseConfig = {
-  apiKey: "AIzaSyD8BVd8CBCfbx_8dE_2wG1iMtl0_nHNFIs",
-  authDomain: "ranking-486f7.firebaseapp.com",
-  projectId: "ranking-486f7",
-  storageBucket: "ranking-486f7.appspot.com",
-  messagingSenderId: "967486263195",
-  appId: "1:967486263195:web:a98055068c4a17057f5b3e",
-  measurementId: "G-VFSYRYNP0N"
+  apiKey: "AIzaSyBaMTqV9iadEMLcCODEf8Nn1_VATLAC-5w",
+  authDomain: "xrpl-nate.firebaseapp.com",
+  projectId: "xrpl-nate",
+  storageBucket: "xrpl-nate.appspot.com",
+  messagingSenderId: "696235957039",
+  appId: "1:696235957039:web:fe6eef42b5003b757a5fda",
+  measurementId: "G-Q59LQZ3BZQ"
 };
 
 // Initialize Firebase
