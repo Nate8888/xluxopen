@@ -66,7 +66,25 @@ class Home extends React.Component {
                     ownerAddr: '0x1ef4',
                     available: 5,
                     price: 600
-                }
+                },
+                {
+                    filePreview: "https://firebasestorage.googleapis.com/v0/b/xrpl-nate.appspot.com/o/makeup.gif?alt=media&token=ad8b9933-1e42-4d3f-80c9-a343580e8ede",
+                    name: 'Oscar-Winning Make-Up Technique with S. Howard',
+                    description: 'Ut enim ad minima veniam',
+                    ownerImg: NFTSample,
+                    ownerAddr: '0x2911',
+                    available: 10,
+                    price: 120
+                },
+                {
+                    filePreview: "https://firebasestorage.googleapis.com/v0/b/xrpl-nate.appspot.com/o/mrbeast.gif?alt=media&token=465b1dcf-7509-46f0-80eb-b80c8bc4e862",
+                    name: 'Million dollar insights with Mr. Beast',
+                    description: 'Ut enim ad minima veniam, quis nostrum exercitationem ullam',
+                    ownerImg: NFTSample,
+                    ownerAddr: '0x2911',
+                    available: 10,
+                    price: 120
+                },
             ]
         }
 

@@ -104,10 +104,10 @@ class Mint extends React.Component {
                 navigate("/")
             }, 2500)
         })
-        .catch(error) => {
+        .catch(error => {
             console.log("Error uploading file:")
             console.log(error)
-        }
+        })
     }
 
     render() {

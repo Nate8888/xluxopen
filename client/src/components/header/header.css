@@ -28,7 +28,7 @@
     color: var(--w) !important;
     background-color: var(--dbg) !important;
     border-radius: 4px;
-    padding: 6px 20px;
+    padding: 3px 20px;
     transition: 0.2s;
     font-weight: bold;
 }
