@@ -5,7 +5,7 @@ import json
 import requests
 import datetime
 import math
-from flask import Flask, render_template, request, jsonify, redirect
+from flask import Flask, render_template, request, jsonify, redirect, Response, stream_with_context
 from flask_cors import CORS, cross_origin
 import xrpl
 from xrpl.wallet import generate_faucet_wallet
@@ -259,21 +259,23 @@ def mint():
 
     total_price_in_xrp = int(sell_amt) * float(amount_in_xrp)
 
-    # Issuer is going to Issue the NFT minting to the hot_wallet.
-    # Hot wallet will hold a balance of the respective NFT in the ledger
-    tx_hash  = mint_nft_on_xrpl(cold_wallet, hot_wallet, currency_code, issue_quantity, memo_data, memo_type)
-    final_transaction_url_on_ledger = base_xrpl_url + tx_hash
+    def process_stuff():
+        yield "{'timeout':1}"
+        # Issuer is going to Issue the NFT minting to the hot_wallet.
+        # Hot wallet will hold a balance of the respective NFT in the ledger
+        tx_hash  = mint_nft_on_xrpl(cold_wallet, hot_wallet, currency_code, issue_quantity, memo_data, memo_type)
+        final_transaction_url_on_ledger = base_xrpl_url + tx_hash
+        yield "{'timeout':2}"
+        # Now after we minted the asset, we will automatically list it for sale using OfferCreate
+        sell_hash, normalized_quantity = sell_nft_after_minting(currency_code, cold_wallet, issue_quantity, hot_wallet, total_price_in_xrp, memo_data, memo_type)
+        final_sale_on_ledger = base_xrpl_url + sell_hash
 
-    # Now after we minted the asset, we will automatically list it for sale using OfferCreate
-    sell_hash, normalized_quantity = sell_nft_after_minting(currency_code, cold_wallet, issue_quantity, hot_wallet, total_price_in_xrp, memo_data, memo_type)
-    final_sale_on_ledger = base_xrpl_url + sell_hash
 
-
-    # Add the NFT to the database so we can list them in the website later
-    add_nft_sale(sell_hash, name, desc, amount_in_xrp, sell_amt, URL, cold_wallet.classic_address, currency_code, normalized_quantity, memo_data, memo_type)
-
-    res = {'mintingTransaction':final_transaction_url_on_ledger, 'NFTOwnerAccount': hot_wallet.classic_address, 'saleTransaction':final_sale_on_ledger}
-    return jsonify(res)
+        # Add the NFT to the database so we can list them in the website later
+        add_nft_sale(sell_hash, name, desc, amount_in_xrp, sell_amt, URL, cold_wallet.classic_address, currency_code, normalized_quantity, memo_data, memo_type)
+        yield "{'timeout':4}"
+        yield "{'mintingTransaction':final_transaction_url_on_ledger, 'NFTOwnerAccount': hot_wallet.classic_address, 'saleTransaction':final_sale_on_ledger}"
+    return Response(stream_with_context(process_stuff()))
 
 # Buys the specified NFT
 @app.route('/buy', methods=['POST'])
