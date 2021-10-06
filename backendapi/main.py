@@ -264,11 +264,14 @@ def mint():
     tx_hash  = mint_nft_on_xrpl(cold_wallet, hot_wallet, currency_code, issue_quantity, memo_data, memo_type)
     final_transaction_url_on_ledger = base_xrpl_url + tx_hash
 
-
     # Now after we minted the asset, we will automatically list it for sale using OfferCreate
     sell_hash = sell_nft_after_minting(currency_code, cold_wallet, issue_quantity, hot_wallet, total_price_in_xrp, memo_data, memo_type)
     final_sale_on_ledger = base_xrpl_url + sell_hash
 
+
+    # Add the NFT to the database so we can list them in the website later
+    add_nft_sale(sell_hash, name, desc, amount_in_xrp, sell_amt, URL, cold_wallet.classic_address, currency_code, issue_quantity, memo_data, memo_type)
+    
     res = {'mintingTransaction':final_transaction_url_on_ledger, 'NFTOwnerAccount': hot_wallet.classic_address, 'saleTransaction':final_sale_on_ledger}
     return jsonify(res)
 
