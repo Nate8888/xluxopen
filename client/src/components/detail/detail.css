@@ -93,3 +93,36 @@
     font-weight: bold;
     font-size: 2em;
 }
+
+.history {
+    background-color: var(--lg);
+    padding: 40px;
+    border-radius: 4px;
+    margin: 20px 0;
+}
+
+.history p {
+    font-weight: bold;
+}
+
+.history small {
+    
+}
+
+.buy-btn {
+    position: absolute;
+    bottom: 20px;
+    border: none;
+    padding: 16px 32px;
+    color: var(--w);
+    background-color: var(--dbg);
+    transition: 0.2s;
+    border-radius: 4px;
+}
+
+.buy-btn:hover {
+    transition: 0.2s;
+    border-right: 10px solid var(--p);
+    font-weight: bold;
+    cursor: pointer;
+}

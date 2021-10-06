@@ -1,4 +1,7 @@
 import React from 'react';
+import { navigate } from '@reach/router'
+import Loading from '../loading'
+import { addNFTToDB } from '../../firebase'
 
 import NFTSample from '../../assets/test-img.jpeg'
 
@@ -18,7 +21,8 @@ class Mint extends React.Component {
             nft_quantity: '',
             nft_file: '',
             noun: 'community',
-            dollars: 0
+            dollars: 0,
+            loading: true
         }
 
         this.XRPL_USD_RATE = 2000;
@@ -40,6 +44,9 @@ class Mint extends React.Component {
         //         ix = ++ix % nouns.length
         //     })
         // }, 2000)
+        setTimeout(() => {
+            this.setState({ loading: false })
+        }, 2000)
     }
 
     onChangeNFTName(e) {
@@ -72,9 +79,9 @@ class Mint extends React.Component {
     }
 
     async create() {
-        if (this.state.nft_price <= 0) return;
-        if (this.state.nft_period <= 0) return;
-        if (this.state.nft_quantity <= 0) return;
+        // if (this.state.nft_price <= 0) return;
+        // if (this.state.nft_period <= 0) return;
+        // if (this.state.nft_quantity <= 0) return;
 
         const tokenInfo = {
             name: this.state.nft_name,
@@ -86,11 +93,27 @@ class Mint extends React.Component {
             // @warning: dev purposes only (comment before pushing to production):
             image: 'https://firebasestorage.googleapis.com/v0/b/test-385af.appspot.com/o/chi.jpeg?alt=media&token=6559c4da-fbe9-410f-b779-3ce03172da1b'
         }
+
+        this.setState({ loading: true })
+        addNFTToDB
+        .then(url => {
+            // API call here (to submit file URL)
+
+            // To prevent multiple requests.
+            setTimeout(() => {
+                navigate("/")
+            }, 2500)
+        })
+        .catch(error) => {
+            console.log("Error uploading file:")
+            console.log(error)
+        }
     }
 
     render() {
         return (
             <div className='mint-container'>
+                {this.state.loading && <Loading />}
                 <div className="showcase-container">
                     <div className="showcase">
                         <h2 className='create-title'>Let's create <span className='gimme-border'>your token</span></h2>
@@ -174,7 +197,7 @@ class Mint extends React.Component {
                             <p className='price'>{this.state.nft_price ? this.state.nft_price +  ' XRP' : '15 XRP'}</p>
                             <p className='owner'>
                                 <img src={NFTSample} alt="Owner" />
-                                <p>{this.state.creator_addr}</p>
+                                <span>{this.state.creator_addr}</span>
                             </p>
                             <p className='quantity'>{this.state.nft_quantity || '30'} tickets available</p>
                         </div>
