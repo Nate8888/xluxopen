@@ -274,7 +274,8 @@ def mint():
         # Add the NFT to the database so we can list them in the website later
         add_nft_sale(sell_hash, name, desc, amount_in_xrp, sell_amt, URL, cold_wallet.classic_address, currency_code, normalized_quantity, memo_data, memo_type)
         yield "{'timeout':4}"
-        yield "{'mintingTransaction':final_transaction_url_on_ledger, 'NFTOwnerAccount': hot_wallet.classic_address, 'saleTransaction':final_sale_on_ledger}"
+        dict = {'mintingTransaction':final_transaction_url_on_ledger, 'NFTOwnerAccount': hot_wallet.classic_address, 'saleTransaction':final_sale_on_ledger}
+        yield str(dict)
     return Response(stream_with_context(process_stuff()))
 
 # Buys the specified NFT
