@@ -7,7 +7,7 @@ xLux is a one-stop shop for limited and exclusive techniques, strategies, and ex
 All API requests interact with wallets that are currently stored in memory. They are automatically generated as needed throughout the demo. However, if there's any type of glitch/bug, you can force reset the wallets and it might fix your issues.
 
 ```http
-POST 127.0.0.1:8080/resetwallets
+POST https://xlux.herokuapp.com/resetwallets
 ```
 
 | Parameter | Type | Description |
@@ -27,7 +27,7 @@ POST 127.0.0.1:8080/resetwallets
 This endpoint gets the current address for the NFT issuer, distributor, and buyer for visual purposes. You will only use this API if you are interested in showing wallet addresses.
 
 ```http
-POST 127.0.0.1:8080/getwallets
+POST https://xlux.herokuapp.com/getwallets
 ```
 
 | Parameter | Type | Description |
@@ -45,7 +45,7 @@ POST 127.0.0.1:8080/getwallets
 This endpoint gets all NFTs that are for sale on xLux. It will only return the NFTs that were minted through our platform.
 
 ```http
-POST 127.0.0.1:8080/nftsforsale
+POST https://xlux.herokuapp.com/nftsforsale
 ```
 
 | Parameter | Type | Description |
@@ -78,11 +78,12 @@ POST 127.0.0.1:8080/nftsforsale
 ```
 
 ## Mint a NFT and Create an Offer to buy it
+WARNING: This endpoint was super slow and it was timing out on Heroku. Therefore, I had to use a stream of data to overcome that.
 
 This endpoint will first mint the NFT using the built-in issuer and distribution accounts and then it will open a 'selling' position on the XRP Ledger. The transaction will be added to the database so it can be used on the endpoint that lists nfts for sale.
 
 ```http
-POST 127.0.0.1:8080/mint
+POST https://xlux.herokuapp.com/mint
 ```
 
 Form-Data
@@ -97,8 +98,12 @@ Form-Data
 ## Response
 Will return the address of the NFT owner and the URL transactions on the XRP Ledger. (the saleTransaction shows that NFTOwnerAccount has the NFT they minted)
 
+NOTE: You'll have to figure out how to get the data you need:  mintingTransaction, NFTOwnerAccount, saleTransaction.
+Look below. These timeout objects are there so heroku doesn't time us out. You should ignore them when you are building the requests.
+
 ```javascript
-res = {'mintingTransaction':'https://explorer-testnet.xrplf.org/tx/6C669098CE3402595B1F2ED1F5BCDCBD0C7DF09CC4E2F763998A87960A7DB68C', 'NFTOwnerAccount': 'rXCgiExAQfMaZCVEzSR7qCmsBtjVaE8pXa', 'saleTransaction':'https://explorer-testnet.xrplf.org/tx/6C669098CE3402595B1F2ED1F5BCDCBD0C7DF09CC4E2F763998A87960A7DB68C'}
+{'timeout':1}{'timeout':2}{'timeout':4}{'mintingTransaction':final_transaction_url_on_ledger, 'NFTOwnerAccount':
+hot_wallet.classic_address, 'saleTransaction':final_sale_on_ledger}
 ```
 
 
@@ -109,7 +114,7 @@ This endpoint is the most complicated because it depends on the data that you re
 My recommendation is that you first get all data from `/nftsforsale` and then you will send the data for 1 specific NFT that someone is trying to buy as shown below:
 
 ```http
-POST 127.0.0.1:8080/buy
+POST https://xlux.herokuapp.com/buy
 ```
 
 | Parameter | Type | Description |
