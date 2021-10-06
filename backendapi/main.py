@@ -9,6 +9,44 @@ from flask import Flask, render_template, request, jsonify, redirect
 from flask_cors import CORS, cross_origin
 import xrpl
 from xrpl.wallet import generate_faucet_wallet
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+
+cred = credentials.Certificate('ripplecred.json')
+firebase_admin.initialize_app(cred)
+db = firestore.client()
+
+# When an NFT is being sold, we add it to the database in order to display them
+def add_nft_sale(transaction_hash, name, desc, sellprice, amt, url, issuer, currencycode, sciamt, memodata, memotype):
+    doc_ref = db.collection('nfts').document(transaction_hash)
+    doc_ref.set({
+        'name': name,
+        'description': desc,
+        'sellprice': sellprice,
+        'amount': 1,
+        'url': url,
+        'transactionhash': transaction_hash,
+        'issuer': issuer,
+        'currencycode':currencycode,
+        'scientificamount': sciamt,
+        'memodata' : memodata,
+        'memotype' : memotype
+    })
+
+# When a NFT is sold, we remove it from our records
+def delete_nft_from_sale(transaction_hash):
+    doc_ref = db.collection("nfts").document(transaction_hash)
+    doc_ref.delete()
+
+# List all NFTs to show in our "front page"
+def query_for_all_nfts():
+    all_nfts = db.collection('nfts').stream()
+    list_of_all_nfts = []
+    for nft in all_nfts:
+        data = nft.to_dict()
+        list_of_all_nfts.append(data)
+    return list_of_all_nfts
 
 # Connection Setup
 testnet_url = "https://s.altnet.rippletest.net:51234"
@@ -239,6 +277,7 @@ def mint():
 @cross_origin()
 def simulate_buying():
     base_xrpl_url = "https://explorer-testnet.xrplf.org/tx/"
+    transactionhash = request.form.get('transactionhash')
     nft_issuer_classic_address = request.form.get('issueraddress')
     currency_code = request.form.get('currencycode')
     amt_for_sale = request.form.get('amount')
