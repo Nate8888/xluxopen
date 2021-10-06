@@ -16,10 +16,10 @@ import {
     where
 } from "firebase/firestore";
 const firebaseConfig = {
-  apiKey: "AIzaSyBaMTqV9iadEMLcCODEf8Nn1_VATLAC-5w",
-  authDomain: "xrpl-nate.firebaseapp.com",
-  projectId: "xrpl-nate",
-  storageBucket: "xrpl-nate.appspot.com",
+  apiKey: process.env.key,
+  authDomain: process.env.domain,
+  projectId: process.env.pid,
+  storageBucket: process.env.bucket,
   messagingSenderId: "696235957039",
   appId: "1:696235957039:web:fe6eef42b5003b757a5fda",
   measurementId: "G-Q59LQZ3BZQ"
