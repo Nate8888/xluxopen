@@ -86,3 +86,8 @@ input, button, textarea {
     color: var(--w);
     font-weight: bold;
 }
+
+.logo:hover {
+    font-weight: bold;
+    cursor: pointer;
+}

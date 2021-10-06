@@ -8,7 +8,7 @@ class Header extends React.Component {
         return (
             <div className="header-container">
                 <div className="header">
-                    <p className="logo" onClick={() => navigate("/")}>Logo</p>
+                    <p className="logo" onClick={() => navigate("/")}>xlux</p>
                     <div className="nav">
                         <a href="/">Explore</a>
                         <a href="/mint">Create</a>
