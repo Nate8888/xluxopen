@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import { navigate } from '@reach/router'
 
 import NFTSample from '../../assets/test-img.jpeg'
@@ -16,11 +17,13 @@ class Home extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            title: 'information',
+            titleIx: 0,
+            wallet_info: {},
+            listings: [],
             // @warning: development only
             // uncomment for production since we'll be retrieving
             // NFTs from XRPL
-            title: 'information',
-            titleIx: 0,
             items: [
                 {
                     filePreview: "https://firebasestorage.googleapis.com/v0/b/test-385af.appspot.com/o/painting.gif?alt=media&token=e5dc45d2-e861-4d3e-b36a-335db72fe1e3",
@@ -96,11 +99,67 @@ class Home extends React.Component {
             if (this.videoRef && this.videoRef.current) this.videoRef.current.play()
         })
 
+        // Showcase animation
         setInterval(() => {
             const words = ["techniques", "strategies", "experiences", "theories", "information"]
             const ix = (this.state.titleIx + 1) % words.length;
             this.setState({ titleIx: ix, title: words[ix] })
         }, 2000)
+
+        // Retrieving wallet addresses
+        let apiURL = "https://xlux.herokuapp.com/getwallets"
+        let bodyFormData = new FormData();
+        bodyFormData.append("file_url_raw", url);
+
+        // API call here (to submit file URL)
+        axios({
+            method: "post",
+            url: apiURL,
+            data: bodyFormData,
+            headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then(response => {
+            // handle success
+            console.log(response);
+            setTimeout(() => {
+                // To prevent multiple subsequent requests to our API.
+                this.setState({ loading: false, wallet_info: response.data.wallet_info })
+            }, 2000)
+        })
+        .catch(error => {
+            // handle error
+            console.log(error);
+            setTimeout(() => {
+                // To prevent multiple subsequent requests to our API.
+                this.setState({ loading: false })
+            }, 2000)
+        });
+
+        // Retrieve listings
+        apiURL = "https://xlux.herokuapp.com/nftsforsale"
+
+        // API call here (to submit file URL)
+        axios({
+            method: "get",
+            url: apiURL,
+            headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then(response => {
+            // handle success
+            console.log(response);
+            setTimeout(() => {
+                // To prevent multiple subsequent requests to our API.
+                this.setState({ loading: false, listings: response.data.listings })
+            }, 2000)
+        })
+        .catch(error => {
+            // handle error
+            console.log(error);
+            setTimeout(() => {
+                // To prevent multiple subsequent requests to our API.
+                this.setState({ loading: false })
+            }, 2000)
+        });
     }
 
     render() {

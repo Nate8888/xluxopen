@@ -1,5 +1,7 @@
 import React from 'react';
+import axios from 'axios'
 import { navigate } from '@reach/router'
+
 import Loading from '../loading'
 import { addNFTToDB } from '../../firebase'
 
@@ -84,9 +86,9 @@ class Mint extends React.Component {
     }
 
     async create() {
-        // if (this.state.nft_price <= 0) return;
-        // if (this.state.nft_period <= 0) return;
-        // if (this.state.nft_quantity <= 0) return;
+        if (this.state.nft_price <= 0) return;
+        if (this.state.nft_period <= 0) return;
+        if (this.state.nft_quantity <= 0) return;
 
         const tokenInfo = {
             name: this.state.nft_name,
@@ -94,25 +96,52 @@ class Mint extends React.Component {
             price: this.state.nft_price,
             valid_for_days: this.state.nft_period,
             quantity: this.state.nft_quantity,
-            // image: this.state.nft_file_link,
-            // @warning: dev purposes only (comment before pushing to production):
-            image: 'https://firebasestorage.googleapis.com/v0/b/test-385af.appspot.com/o/chi.jpeg?alt=media&token=6559c4da-fbe9-410f-b779-3ce03172da1b'
+            image: this.state.nft_file_link,
         }
 
         this.setState({ loading: true })
-        // addNFTToDB
-        // .then(url => {
-        //     // API call here (to submit file URL)
-        //
-        //     // To prevent multiple requests.
+
+        const apiURL = "https://xlux.herokuapp.com/mint"
+
+        // Adding to db
+        addNFTToDB
+        .then(url => {
+            const bodyFormData = new FormData();
+            bodyFormData.append("file_url_raw", url);
+
+            // API call here (to submit file URL)
+            axios({
+                method: "post",
+                url: apiURL,
+                data: bodyFormData,
+                headers: { "Content-Type": "multipart/form-data" },
+            })
+            .then(response => {
+                // handle success
+                console.log(response);
+                setTimeout(() => {
+                    // To prevent multiple subsequent requests to our API.
+                    this.setState({ loading: false })
+                }, 2000)
+            })
+            .catch(error => {
+                // handle error
+                console.log(error);
+                setTimeout(() => {
+                    // To prevent multiple subsequent requests to our API.
+                    this.setState({ loading: false })
+                }, 2000)
+            });
+
+            // To prevent multiple requests.
             setTimeout(() => {
                 navigate("/")
             }, 2500)
-        // })
-        // .catch(error => {
-        //     console.log("Error uploading file:")
-        //     console.log(error)
-        // })
+        })
+        .catch(error => {
+            console.log("Error uploading file:")
+            console.log(error)
+        })
     }
 
     render() {

@@ -23,6 +23,36 @@ class Detail extends React.Component {
 
     buy() {
         this.setState({ loading: true })
+
+        // Issuing mint transaction
+        const apiURL = "https://xlux.herokuapp.com/mint"
+        let bodyFormData = new FormData();
+        bodyFormData.append("token_id", this.props.location.state.id);
+
+        axios({
+            method: "post",
+            url: apiURL,
+            data: bodyFormData,
+            headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then(response => {
+            // handle success
+            console.log(response);
+            setTimeout(() => {
+                // To prevent multiple subsequent requests to our API.
+                this.setState({ loading: false })
+            }, 2000)
+        })
+        .catch(error => {
+            // handle error
+            console.log(error);
+            setTimeout(() => {
+                // To prevent multiple subsequent requests to our API.
+                this.setState({ loading: false })
+            }, 2000)
+        });
+
+        // Preventing convoluted requests.
         setTimeout(() => {
             navigate("/")
         }, 2500)
