@@ -271,7 +271,7 @@ def mint():
 
     # Add the NFT to the database so we can list them in the website later
     add_nft_sale(sell_hash, name, desc, amount_in_xrp, sell_amt, URL, cold_wallet.classic_address, currency_code, issue_quantity, memo_data, memo_type)
-    
+
     res = {'mintingTransaction':final_transaction_url_on_ledger, 'NFTOwnerAccount': hot_wallet.classic_address, 'saleTransaction':final_sale_on_ledger}
     return jsonify(res)
 
@@ -296,6 +296,8 @@ def simulate_buying():
     buying_transaction_hash = buy_nft_after_offer_create(buyer_wallet, currency_code, nft_issuer_classic_address, amt_for_sale, price_in_XRPs, memo_data, memo_type)
     final_transaction_url_of_nft_buy = base_xrpl_url + buying_transaction_hash
 
+    # When we finish buying the NFT, we remove from the database because someone else owns it now.
+    delete_nft_from_sale(transactionhash)
     res = {'buyingTransaction':final_transaction_url_of_nft_buy, 'buyerAddress': buyer_wallet.classic_address}
     return jsonify(res)
 
@@ -318,6 +320,13 @@ def getwalletvals():
         reset_buyer_wallet()
 
     res = {'issuer':cold_wallet.classic_address, 'distributor':hot_wallet.classic_address, 'buyer':buyer_wallet.classic_address}
+    return jsonify(res)
+
+@app.route('/nftsforsale', methods=['POST'])
+@cross_origin()
+def get_nfts_for_sale():
+    all_nfts = query_for_all_nfts()
+    res = {'data':all_nfts}
     return jsonify(res)
 
 # Start Flask backend
