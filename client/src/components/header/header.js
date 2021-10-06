@@ -12,7 +12,7 @@ class Header extends React.Component {
                     <div className="nav">
                         <a href="/">Explore</a>
                         <a href="/mint">Create</a>
-                        <a className="special" href="/">Connect Wallet</a>
+                        <a className="special" href="/">✅  Wallet Connected</a>
                     </div>
                 </div>
             </div>
