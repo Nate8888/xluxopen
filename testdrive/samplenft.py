@@ -119,6 +119,7 @@ def sell_nft_after_minting(currency_code, cold_wallet, amt_for_sale, hot_wallet)
     )
 
     response = xrpl.transaction.send_reliable_submission(sell_nft_prepared, client)
+    print(response.result)
     print("Transaction Succeded! Here's the ledger hash: "+response.result.get('hash'))
     print("==============================================")
 
@@ -126,12 +127,15 @@ def buy_nft_after_offer_create(buyer, currency_code, nft_issuer_classic_address,
     print("BUYING THE NFT....")
     buy_nft = xrpl.models.transactions.OfferCreate(
         account=buyer.classic_address,
+
         taker_gets = "100000000",
+
         taker_pays = xrpl.models.amounts.issued_currency_amount.IssuedCurrencyAmount(
             currency=currency_code,
             issuer=nft_issuer_classic_address,
             value=amt_for_sale
         ),
+
         memos=[xrpl.models.transactions.Memo(memo_data=memo_data, memo_type=memo_type)]
     )
 
@@ -142,6 +146,7 @@ def buy_nft_after_offer_create(buyer, currency_code, nft_issuer_classic_address,
     )
 
     response = xrpl.transaction.send_reliable_submission(buy_nft_prepared, client)
+    print(response.result)
     print("Transaction Succeded! Here's the ledger hash: "+response.result.get('hash'))
     print("==============================================")
 
