@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios'
 import { navigate } from '@reach/router'
 
-import Loading from '../loading'
+import Loading from '../loading/loading'
 import { addNFTToDB } from '../../firebase'
 
 import NFTSample from '../../assets/test-img.jpeg'

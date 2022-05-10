@@ -54,39 +54,6 @@ input, button, textarea {
     border-bottom: 3px solid var(--p);
 }
 
-.loading-container {
-    position: absolute;
-    background-color: rgba(6, 6, 6, 0.7);
-    width: 100vw;
-    height: 100vh;
-    z-index: 999;
-    top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.loading-container .loading {
-    background-color: var(--p);
-    width: 50px;
-    height: 50px;
-    border-radius: 4px;
-    animation: spin 1s linear 1s infinite;
-}
-
-@keyframes spin {
-    100% {
-        transform:rotate(360deg);
-    }
-}
-
-.ld {
-    color: var(--w);
-    font-weight: bold;
-}
-
 .logo:hover {
     font-weight: bold;
     cursor: pointer;
