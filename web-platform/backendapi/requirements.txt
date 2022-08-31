@@ -11,4 +11,4 @@ google-api-core==1.26.3
 google-cloud==0.34.0
 google-auth==1.28.0
 grpcio==1.36.1
-xrpl-py==1.1.1 
+xrpl-py==1.6.0 
