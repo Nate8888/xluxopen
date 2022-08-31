@@ -2,9 +2,31 @@
 
 
 <!-- Description -->
-```
-xLux is a decentralized knowledge exchange platform that enables creators and communities to grow, engage, and improve by providing an easy way to exchange “Knowledge NFTs” containing exclusive content such as techniques, strategies, theories, and experiences.
-```
+
+##### xLux is a decentralized knowledge exchange platform that enables creators and communities to grow, engage, and improve by providing an easy way to exchange “Knowledge NFTs” containing exclusive content such as techniques, strategies, theories, and experiences.
+
+<hr>
+
+## Table of Contents
+  - [Features](#features)
+  - [Getting Started](#getting-started)
+  - [Reset Wallets](#reset-wallets)
+  - [Mint NFT](#mint-nft)
+  - [Sell NFT](#sell-nft)
+  - [Buy NFT](#buy-nft)
+  - [Accept Buy Offer](#accept-buy-offer)
+  - [Accept Sell Offer](#accept-sell-offer)
+  - [Cancel Buy Offer](#cancel-buy-offer)
+  - [Cancel Sell Offer](#cancel-sell-offer)
+  - [Get NFT Data from IPFS](#get-nft-data-from-ipfs)
+  - [List Account NFTs](#list-account-nfts)
+  - [List Account NFT Offers](#list-account-nft-offers)
+  - [List Account NFT Buy Offers](#list-account-nft-buy-offers)
+  - [List All xLux Accounts](#list-all-xlux-accounts)
+  - [List All NFTs in xLux](#list-all-nfts-in-xlux)
+  - [List All NFT Offers in xLux](#list-all-nft-offers-in-xlux)
+  - [Append Address to Database](#append-address-to-database)
+
 <hr>
 
 ## Features
